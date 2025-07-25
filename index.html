@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybor's Virtual Mouse - Advanced Gesture Control System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">Cybor's Virtual Mouse</h1>
+                <p class="app-subtitle">By Abhishek Tiwary • Advanced Gesture Control System v2.1.0</p>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Status:</span>
+                    <span class="stat-value" id="system-status">Ready</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Mode:</span>
+                    <span class="stat-value" id="current-mode">Gesture + Voice</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Accuracy:</span>
+                    <span class="stat-value" id="accuracy">98.5%</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="dashboard">Dashboard</button>
+            <button class="nav-tab" data-tab="gestures">Gesture Demo</button>
+            <button class="nav-tab" data-tab="voice">Cybor AI</button>
+            <button class="nav-tab" data-tab="settings">Settings</button>
+            <button class="nav-tab" data-tab="documentation">Documentation</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboard-tab">
+                <div class="dashboard-layout">
+                    <div class="hero-section">
+                        <div class="card feature-card">
+                            <div class="card__body">
+                                <h2>Welcome to Cybor's Virtual Mouse</h2>
+                                <p>Experience the future of human-computer interaction with advanced gesture recognition and voice control powered by Cybor AI technology. Control your computer without touching anything - just use your hands and voice.</p>
+                                <div class="feature-highlights">
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">👋</div>
+                                        <h4>Gesture Recognition</h4>
+                                        <p>10 precise hand gestures for complete mouse control</p>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">🎤</div>
+                                        <h4>Cybor AI Voice</h4>
+                                        <p>13 voice commands for system interaction</p>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">⚡</div>
+                                        <h4>Real-time Processing</h4>
+                                        <p>MediaPipe-powered recognition at 30+ FPS</p>
+                                    </div>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn btn--primary" id="start-system">Start Cybor System</button>
+                                    <button class="btn btn--secondary" id="demo-mode">Demo Mode</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="system-overview">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>System Status</h3>
+                                <div class="status-grid">
+                                    <div class="status-item">
+                                        <span class="status-indicator active" id="camera-status"></span>
+                                        <span>Camera</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="status-indicator active" id="microphone-status"></span>
+                                        <span>Microphone</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="status-indicator active" id="gesture-status"></span>
+                                        <span>Gesture Recognition</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="status-indicator active" id="voice-status"></span>
+                                        <span>Cybor AI Voice</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Performance Metrics</h3>
+                                <div class="metrics-grid">
+                                    <div class="metric-item">
+                                        <div class="metric-value">30.2</div>
+                                        <div class="metric-label">FPS</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-value">12ms</div>
+                                        <div class="metric-label">Latency</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-value">4.2GB</div>
+                                        <div class="metric-label">Memory</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-value">15%</div>
+                                        <div class="metric-label">CPU Usage</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gesture Demo Tab -->
+            <div class="tab-content" id="gestures-tab">
+                <div class="gestures-layout">
+                    <div class="gesture-visualizer">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Live Gesture Recognition</h3>
+                                <div class="gesture-display" id="gesture-display">
+                                    <div class="hand-visualization">
+                                        <div class="hand-outline" id="hand-outline">
+                                            <div class="finger" data-finger="thumb"></div>
+                                            <div class="finger" data-finger="index"></div>
+                                            <div class="finger" data-finger="middle"></div>
+                                            <div class="finger" data-finger="ring"></div>
+                                            <div class="finger" data-finger="pinky"></div>
+                                        </div>
+                                    </div>
+                                    <div class="gesture-info">
+                                        <div class="current-gesture" id="current-gesture">Neutral Gesture</div>
+                                        <div class="gesture-confidence" id="gesture-confidence">Confidence: 98.5%</div>
+                                    </div>
+                                </div>
+                                <div class="gesture-controls">
+                                    <button class="btn btn--primary btn--sm" id="simulate-gesture">Simulate Random Gesture</button>
+                                    <button class="btn btn--secondary btn--sm" id="calibrate-gestures">Calibrate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gesture-list">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Available Gestures</h3>
+                                <div class="gesture-items" id="gesture-items">
+                                    <!-- Gesture items will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Gesture History</h3>
+                                <div class="gesture-log" id="gesture-log">
+                                    <div class="log-entry">System initialized - Ready for gestures</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Assistant Tab -->
+            <div class="tab-content" id="voice-tab">
+                <div class="voice-layout">
+                    <div class="voice-interface">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Cybor AI Voice Assistant</h3>
+                                <div class="voice-visualizer">
+                                    <div class="voice-avatar" id="voice-avatar">
+                                        <div class="avatar-ring"></div>
+                                        <div class="avatar-core">🤖</div>
+                                        <div class="voice-waves" id="voice-waves">
+                                            <div class="wave"></div>
+                                            <div class="wave"></div>
+                                            <div class="wave"></div>
+                                        </div>
+                                    </div>
+                                    <div class="voice-status">
+                                        <div class="voice-state" id="voice-state">Listening...</div>
+                                        <div class="voice-command" id="voice-command">Say "Cybor" to activate</div>
+                                    </div>
+                                </div>
+                                <div class="voice-controls">
+                                    <button class="btn btn--primary" id="activate-voice">Activate Cybor</button>
+                                    <button class="btn btn--secondary" id="test-command">Test Command</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="voice-commands">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Voice Commands</h3>
+                                <div class="command-categories">
+                                    <div class="command-category">
+                                        <h4>System Control</h4>
+                                        <div class="command-list" id="system-commands">
+                                            <!-- Commands will be populated by JavaScript -->
+                                        </div>
+                                    </div>
+                                    <div class="command-category">
+                                        <h4>Navigation</h4>
+                                        <div class="command-list" id="navigation-commands">
+                                            <!-- Commands will be populated by JavaScript -->
+                                        </div>
+                                    </div>
+                                    <div class="command-category">
+                                        <h4>Utilities</h4>
+                                        <div class="command-list" id="utility-commands">
+                                            <!-- Commands will be populated by JavaScript -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Command History</h3>
+                                <div class="command-log" id="command-log">
+                                    <div class="log-entry">Cybor AI initialized and ready</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings-tab">
+                <div class="settings-layout">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Gesture Recognition Settings</h3>
+                            <div class="settings-grid">
+                                <div class="setting-item">
+                                    <label class="form-label">Gesture Sensitivity: <span id="gesture-sensitivity-value">75%</span></label>
+                                    <input type="range" class="range-input" id="gesture-sensitivity" min="10" max="100" value="75">
+                                </div>
+                                <div class="setting-item">
+                                    <label class="form-label">Recognition Threshold: <span id="recognition-threshold-value">85%</span></label>
+                                    <input type="range" class="range-input" id="recognition-threshold" min="50" max="99" value="85">
+                                </div>
+                                <div class="setting-item">
+                                    <label class="form-label">Hand Detection Range: <span id="detection-range-value">1.2m</span></label>
+                                    <input type="range" class="range-input" id="detection-range" min="5" max="30" value="12">
+                                </div>
+                                <div class="setting-item">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="multi-hand-mode" checked>
+                                        <span class="checkmark"></span>
+                                        Enable Multi-Hand Recognition
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Cybor AI Voice Settings</h3>
+                            <div class="settings-grid">
+                                <div class="setting-item">
+                                    <label class="form-label">Voice Activation Sensitivity: <span id="voice-sensitivity-value">80%</span></label>
+                                    <input type="range" class="range-input" id="voice-sensitivity" min="10" max="100" value="80">
+                                </div>
+                                <div class="setting-item">
+                                    <label class="form-label">Command Timeout: <span id="command-timeout-value">3s</span></label>
+                                    <input type="range" class="range-input" id="command-timeout" min="1" max="10" value="3">
+                                </div>
+                                <div class="setting-item">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="continuous-listening" checked>
+                                        <span class="checkmark"></span>
+                                        Continuous Listening Mode
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="voice-feedback" checked>
+                                        <span class="checkmark"></span>
+                                        Enable Voice Feedback
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>System Performance</h3>
+                            <div class="settings-grid">
+                                <div class="setting-item">
+                                    <label class="form-label">Processing Threads: <span id="thread-count-value">4</span></label>
+                                    <input type="range" class="range-input" id="thread-count" min="1" max="8" value="4">
+                                </div>
+                                <div class="setting-item">
+                                    <label class="form-label">Frame Rate: <span id="frame-rate-value">30 FPS</span></label>
+                                    <input type="range" class="range-input" id="frame-rate" min="15" max="60" value="30">
+                                </div>
+                                <div class="setting-item">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="gpu-acceleration" checked>
+                                        <span class="checkmark"></span>
+                                        Enable GPU Acceleration
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="debug-mode">
+                                        <span class="checkmark"></span>
+                                        Enable Debug Mode
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documentation Tab -->
+            <div class="tab-content" id="documentation-tab">
+                <div class="documentation-layout">
+                    <div class="card">
+                        <div class="card__body">
+                            <h2>Cybor's Virtual Mouse Documentation</h2>
+                            <p class="doc-intro">Cybor's Virtual Mouse is an advanced gesture-controlled virtual mouse system that revolutionizes human-computer interaction using cutting-edge Computer Vision and Machine Learning technologies.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>System Requirements</h3>
+                            <div class="requirements-grid">
+                                <div class="requirement-item">
+                                    <h4>Hardware</h4>
+                                    <ul>
+                                        <li>Webcam (720p minimum, 1080p recommended)</li>
+                                        <li>Microphone for voice commands</li>
+                                        <li>4GB RAM minimum (8GB recommended)</li>
+                                        <li>Intel i5 or AMD Ryzen 5 equivalent</li>
+                                    </ul>
+                                </div>
+                                <div class="requirement-item">
+                                    <h4>Software</h4>
+                                    <ul>
+                                        <li>Python 3.8.5+</li>
+                                        <li>MediaPipe Framework</li>
+                                        <li>OpenCV</li>
+                                        <li>PyAudio for voice processing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Installation Guide</h3>
+                            <div class="installation-steps">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>Clone Repository</h4>
+                                        <code>git clone https://github.com/abhishek-tiwary/cybor-virtual-mouse.git</code>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>Create Environment</h4>
+                                        <code>conda create --name cybor-mouse python=3.8.5</code>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>Activate Environment</h4>
+                                        <code>conda activate cybor-mouse</code>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h4>Install Dependencies</h4>
+                                        <code>pip install -r requirements.txt</code>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">
+                                        <h4>Run Cybor System</h4>
+                                        <code>python Cybor.py</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Technical Architecture</h3>
+                            <div class="architecture-info">
+                                <div class="tech-item">
+                                    <h4>Computer Vision Pipeline</h4>
+                                    <p>Utilizes MediaPipe's hand detection and landmark estimation for precise finger tracking and gesture recognition with sub-pixel accuracy.</p>
+                                </div>
+                                <div class="tech-item">
+                                    <h4>Machine Learning Models</h4>
+                                    <p>Custom CNN models trained on diverse hand gesture datasets, optimized for real-time inference with TensorFlow Lite.</p>
+                                </div>
+                                <div class="tech-item">
+                                    <h4>Voice Processing</h4>
+                                    <p>Advanced speech recognition using PyAudio and custom wake word detection for the "Cybor" activation command.</p>
+                                </div>
+                                <div class="tech-item">
+                                    <h4>System Integration</h4>
+                                    <p>Native OS integration for mouse control, system commands, and application interaction across Windows, macOS, and Linux.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>About the Developer</h3>
+                            <div class="developer-info">
+                                <h4>Abhishek Tiwary</h4>
+                                <p>Lead Developer of Cybor's Virtual Mouse, specializing in Computer Vision, Machine Learning, and Human-Computer Interaction. Passionate about creating intuitive interfaces that bridge the gap between human gestures and digital control.</p>
+                                <div class="developer-stats">
+                                    <div class="stat">
+                                        <span class="stat-value">2025</span>
+                                        <span class="stat-label">Current Version Year</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-value">98.5%</span>
+                                        <span class="stat-label">Gesture Accuracy</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-value">30+</span>
+                                        <span class="stat-label">FPS Processing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-info">
+                <span class="status-text" id="status-text">Cybor Virtual Mouse v2.1.0 - Ready</span>
+            </div>
+            <div class="status-indicators">
+                <div class="indicator" id="fps-indicator">30 FPS</div>
+                <div class="indicator" id="latency-indicator">12ms</div>
+                <div class="indicator active" id="connection-indicator">Connected</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
